@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Library Management System</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo-area">
+        <div class="logo-icon">
+            <i class="fa-solid fa-book-open"></i>
+        </div>
+
+        <div>
+            <h4>LibraX</h4>
+            <span>Library System</span>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <p class="menu-title">MAIN</p>
+
+        <a href="#" class="nav-link active" data-section="dashboard">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="#" class="nav-link" data-section="books">
+            <i class="fa-solid fa-book"></i>
+            <span>Books</span>
+        </a>
+
+        <a href="#" class="nav-link" data-section="members">
+            <i class="fa-solid fa-users"></i>
+            <span>Members</span>
+        </a>
+
+        <p class="menu-title">LIBRARY OPERATIONS</p>
+
+        <a href="#" class="nav-link" data-section="issue">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>Issue Book</span>
+        </a>
+
+        <a href="#" class="nav-link" data-section="return">
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+            <span>Return Book</span>
+        </a>
+
+        <a href="#" class="nav-link" data-section="due-dates">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span>Due Dates</span>
+        </a>
+
+        <a href="#" class="nav-link" data-section="fines">
+            <i class="fa-solid fa-indian-rupee-sign"></i>
+            <span>Fines</span>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+        <div class="library-image">
+            <img
+                src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=500&q=80"
+                alt="Library"
+            >
+            <div class="image-overlay">
+                <span>Keep Reading</span>
+            </div>
+        </div>
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main class="main-content">
+
+    <!-- TOP HEADER -->
+
+    <header class="topbar">
+
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="mobile-logo">
+            <i class="fa-solid fa-book-open"></i>
+            LibraX
+        </div>
+
+        <div class="top-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+                type="text"
+                id="globalSearch"
+                placeholder="Search books or members..."
+            >
+        </div>
+
+        <div class="top-actions">
+
+            <button class="icon-button" id="themeToggle" title="Toggle theme">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+
+            <div class="profile">
+
+                <img
+                    src="https://i.pravatar.cc/100?img=12"
+                    alt="Admin"
+                >
+
+                <div class="profile-info">
+                    <strong>Library Staff</strong>
+                    <small>Authorized User</small>
+                </div>
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <section class="page-section active-section" id="dashboard">
+
+        <div class="page-heading">
+
+            <div>
+                <span class="small-heading">LIBRARY MANAGEMENT</span>
+                <h1>Good Morning, Library Staff 👋</h1>
+                <p>Manage books, members and daily library operations.</p>
+            </div>
+
+            <button class="primary-btn" onclick="showSection('books')">
+                <i class="fa-solid fa-book"></i>
+                Manage Books
+            </button>
+
+        </div>
+
+
+        <!-- HERO -->
+
+        <div class="hero-card">
+
+            <div class="hero-content">
+
+                <span class="hero-label">
+                    <i class="fa-solid fa-book-open"></i>
+                    LIBRARY MANAGEMENT SYSTEM
+                </span>
+
+                <h2>
+                    A smarter way to manage
+                    <span>your library.</span>
+                </h2>
+
+                <p>
+                    Manage books, student members, book issues,
+                    returns, due dates and overdue fines from one place.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <button
+                        class="hero-btn"
+                        onclick="showSection('issue')"
+                    >
+                        <i class="fa-solid fa-plus"></i>
+                        Issue a Book
+                    </button>
+
+                    <button
+                        class="hero-outline-btn"
+                        onclick="showSection('members')"
+                    >
+                        View Members
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="hero-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=900&q=85"
+                    alt="Library books"
+                >
+
+                <div class="floating-book book-one">
+                    <i class="fa-solid fa-book"></i>
+                </div>
+
+                <div class="floating-book book-two">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUMMARY CARDS -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon purple">
+                    <i class="fa-solid fa-book"></i>
+                </div>
+
+                <div>
+                    <span>Total Books</span>
+                    <h3>2,458</h3>
+                    <small>Books in library</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon blue">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </div>
+
+                <div>
+                    <span>Issued Books</span>
+                    <h3>348</h3>
+                    <small>Currently issued</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon green">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div>
+                    <span>Student Members</span>
+                    <h3>1,245</h3>
+                    <small>Registered members</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon orange">
+                    <i class="fa-solid fa-calendar-xmark"></i>
+                </div>
+
+                <div>
+                    <span>Overdue Books</span>
+                    <h3>27</h3>
+                    <small>Need attention</small>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- QUICK OPERATIONS -->
+
+        <div class="content-grid">
+
+            <div class="panel">
+
+                <div class="panel-header">
+                    <div>
+                        <h3>Quick Library Operations</h3>
+                        <p>Choose an operation to continue</p>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+
+                    <button onclick="showSection('books')">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Manage Books</span>
+                    </button>
+
+                    <button onclick="showSection('members')">
+                        <i class="fa-solid fa-user-graduate"></i>
+                        <span>Members</span>
+                    </button>
+
+                    <button onclick="showSection('issue')">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <span>Issue Book</span>
+                    </button>
+
+                    <button onclick="showSection('return')">
+                        <i class="fa-solid fa-arrow-down"></i>
+                        <span>Return Book</span>
+                    </button>
+
+                    <button onclick="showSection('due-dates')">
+                        <i class="fa-solid fa-calendar"></i>
+                        <span>Due Dates</span>
+                    </button>
+
+                    <button onclick="showSection('fines')">
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+                        <span>Calculate Fine</span>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECENT ISSUES -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+                    <div>
+                        <h3>Recent Book Issues</h3>
+                        <p>Latest library transactions</p>
+                    </div>
+
+                    <button onclick="showSection('issue')" class="text-btn">
+                        View All
+                    </button>
+                </div>
+
+                <div class="issue-list">
+
+                    <div class="issue-item">
+                        <div class="mini-avatar">RK</div>
+
+                        <div class="issue-info">
+                            <strong>Rahul Kumar</strong>
+                            <span>Clean Code</span>
+                        </div>
+
+                        <small>Today</small>
+                    </div>
+
+                    <div class="issue-item">
+                        <div class="mini-avatar">PS</div>
+
+                        <div class="issue-info">
+                            <strong>Priya S</strong>
+                            <span>Atomic Habits</span>
+                        </div>
+
+                        <small>Yesterday</small>
+                    </div>
+
+                    <div class="issue-item">
+                        <div class="mini-avatar">AR</div>
+
+                        <div class="issue-info">
+                            <strong>Arjun R</strong>
+                            <span>Rich Dad Poor Dad</span>
+                        </div>
+
+                        <small>2 days ago</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= BOOKS ================= -->
+
+    <section class="page-section" id="books">
+
+        <div class="page-heading">
+            <div>
+                <span class="small-heading">FR-01</span>
+                <h1>Book Management</h1>
+                <p>Add and manage library book records.</p>
+            </div>
+
+            <button class="primary-btn" onclick="openBookModal()">
+                <i class="fa-solid fa-plus"></i>
+                Add Book
+            </button>
+        </div>
+
+
+        <div class="filter-bar">
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input
+                    type="text"
+                    id="bookSearch"
+                    placeholder="Search books..."
+                >
+            </div>
+
+            <select id="bookFilter">
+                <option value="all">All Books</option>
+                <option value="available">Available</option>
+                <option value="issued">Issued</option>
+            </select>
+
+        </div>
+
+
+        <div class="books-grid" id="booksGrid">
+
+            <article class="book-card" data-status="available">
+
+                <div class="book-cover">
+                    <img
+                        src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=500&q=80"
+                        alt="The Great Gatsby"
+                    >
+
+                    <span class="available-badge">Available</span>
+                </div>
+
+                <div class="book-details">
+                    <h3>The Great Gatsby</h3>
+                    <p>F. Scott Fitzgerald</p>
+
+                    <div class="book-meta">
+                        <span>Fiction</span>
+                        <strong>12 Copies</strong>
+                    </div>
+
+                    <button onclick="showToast('Book selected')">
+                        View Book
+                    </button>
+                </div>
+
+            </article>
+
+
+            <article class="book-card" data-status="issued">
+
+                <div class="book-cover">
+                    <img
+                        src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=500&q=80"
+                        alt="Atomic Habits"
+                    >
+
+                    <span class="issued-badge">Issued</span>
+                </div>
+
+                <div class="book-details">
+                    <h3>Atomic Habits</h3>
+                    <p>James Clear</p>
+
+                    <div class="book-meta">
+                        <span>Self Help</span>
+                        <strong>8 Copies</strong>
+                    </div>
+
+                    <button onclick="showToast('Book selected')">
+                        View Book
+                    </button>
+                </div>
+
+            </article>
+
+
+            <article class="book-card" data-status="available">
+
+                <div class="book-cover">
+                    <img
+                        src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=500&q=80"
+                        alt="Think and Grow Rich"
+                    >
+
+                    <span class="available-badge">Available</span>
+                </div>
+
+                <div class="book-details">
+                    <h3>Think and Grow Rich</h3>
+                    <p>Napoleon Hill</p>
+
+                    <div class="book-meta">
+                        <span>Business</span>
+                        <strong>15 Copies</strong>
+                    </div>
+
+                    <button onclick="showToast('Book selected')">
+                        View Book
+                    </button>
+                </div>
+
+            </article>
+
+
+            <article class="book-card" data-status="available">
+
+                <div class="book-cover">
+                    <img
+                        src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=500&q=80"
+                        alt="Rich Dad Poor Dad"
+                    >
+
+                    <span class="available-badge">Available</span>
+                </div>
+
+                <div class="book-details">
+                    <h3>Rich Dad Poor Dad</h3>
+                    <p>Robert Kiyosaki</p>
+
+                    <div class="book-meta">
+                        <span>Finance</span>
+                        <strong>10 Copies</strong>
+                    </div>
+
+                    <button onclick="showToast('Book selected')">
+                        View Book
+                    </button>
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= MEMBERS ================= -->
+
+    <section class="page-section" id="members">
+
+        <div class="page-heading">
+            <div>
+                <span class="small-heading">FR-04</span>
+                <h1>Student Members</h1>
+                <p>Maintain student member information.</p>
+            </div>
+
+            <button class="primary-btn" onclick="openMemberModal()">
+                <i class="fa-solid fa-user-plus"></i>
+                Add Member
+            </button>
+        </div>
+
+
+        <div class="table-panel">
+
+            <div class="table-header">
+
+                <div>
+                    <h3>Member Records</h3>
+                    <p>Registered student members</p>
+                </div>
+
+                <div class="search-box small">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input
+                        type="text"
+                        id="memberSearch"
+                        placeholder="Search members..."
+                    >
+                </div>
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Member</th>
+                            <th>Member ID</th>
+                            <th>Department</th>
+                            <th>Books Issued</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="memberTable">
+
+                        <tr>
+                            <td>
+                                <div class="table-user">
+                                    <div class="mini-avatar">RK</div>
+                                    <div>
+                                        <strong>Rahul Kumar</strong>
+                                        <small>rahul@student.edu</small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>LIB001</td>
+                            <td>Information Technology</td>
+                            <td>2</td>
+
+                            <td>
+                                <span class="status active">Active</span>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <div class="table-user">
+                                    <div class="mini-avatar">PS</div>
+                                    <div>
+                                        <strong>Priya S</strong>
+                                        <small>priya@student.edu</small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>LIB002</td>
+                            <td>Computer Science</td>
+                            <td>1</td>
+
+                            <td>
+                                <span class="status active">Active</span>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <div class="table-user">
+                                    <div class="mini-avatar">AR</div>
+                                    <div>
+                                        <strong>Arjun R</strong>
+                                        <small>arjun@student.edu</small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>LIB003</td>
+                            <td>Electronics</td>
+                            <td>3</td>
+
+                            <td>
+                                <span class="status active">Active</span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ISSUE BOOK ================= -->
+
+    <section class="page-section" id="issue">
+
+        <div class="page-heading">
+            <div>
+                <span class="small-heading">FR-02</span>
+                <h1>Issue Book</h1>
+                <p>Record a book issued to a student member.</p>
+            </div>
+        </div>
+
+
+        <div class="form-layout">
+
+            <div class="form-panel">
+
+                <div class="form-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <h3>Issue a Book</h3>
+                <p>Enter the required issue details.</p>
+
+                <form id="issueForm">
+
+                    <label>Student Member</label>
+                    <select required>
+                        <option value="">Select member</option>
+                        <option>Rahul Kumar - LIB001</option>
+                        <option>Priya S - LIB002</option>
+                        <option>Arjun R - LIB003</option>
+                    </select>
+
+                    <label>Book</label>
+                    <select required>
+                        <option value="">Select book</option>
+                        <option>The Great Gatsby</option>
+                        <option>Atomic Habits</option>
+                        <option>Think and Grow Rich</option>
+                        <option>Rich Dad Poor Dad</option>
+                    </select>
+
+                    <label>Issue Date</label>
+                    <input type="date" id="issueDate" required>
+
+                    <label>Due Date</label>
+                    <input type="date" id="dueDate" required>
+
+                    <button class="primary-btn full-width" type="submit">
+                        <i class="fa-solid fa-check"></i>
+                        Issue Book
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <div class="visual-panel">
+
+                <img
+                    src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=900&q=85"
+                    alt="Books"
+                >
+
+                <div class="visual-overlay">
+                    <i class="fa-solid fa-book-open"></i>
+                    <h3>Issue Books Easily</h3>
+                    <p>Record book issues and due dates clearly.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= RETURN BOOK ================= -->
+
+    <section class="page-section" id="return">
+
+        <div class="page-heading">
+            <div>
+                <span class="small-heading">FR-03</span>
+                <h1>Return Book</h1>
+                <p>Record returned books from student members.</p>
+            </div>
+        </div>
+
+
+        <div class="return-layout">
+
+            <div class="return-card">
+
+                <div class="return-icon">
+                    <i class="fa-solid fa-arrow-rotate-left"></i>
+                </div>
+
+                <h3>Return an Issued Book</h3>
+
+                <p>
+                    Select the issued book and record its return.
+                </p>
+
+                <label>Issued Book</label>
+
+                <select id="returnBookSelect">
+
+                    <option value="">
+                        Select issued book
+                    </option>
+
+                    <option value="Atomic Habits">
+                        Atomic Habits - Priya S
+                    </option>
+
+                    <option value="Clean Code">
+                        Clean Code - Rahul Kumar
+                    </option>
+
+                </select>
+
+                <label>Return Date</label>
+
+                <input type="date" id="returnDate">
+
+                <button
+                    class="primary-btn full-width"
+                    onclick="returnBook()"
+                >
+                    <i class="fa-solid fa-check"></i>
+                    Record Return
+                </button>
+
+            </div>
+
+
+            <div class="return-info">
+
+                <div class="info-box">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <div>
+                        <strong>Return Process</strong>
+                        <p>
+                            Select the issued book, enter the return date,
+                            and record the transaction.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="return-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=900&q=85"
+                        alt="Library books"
+                    >
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= DUE DATES ================= -->
+
+    <section class="page-section" id="due-dates">
+
+        <div class="page-heading">
+
+            <div>
+                <span class="small-heading">FR-05</span>
+                <h1>Due Date Tracking</h1>
+                <p>Track due dates of issued books.</p>
+            </div>
+
+        </div>
+
+
+        <div class="table-panel">
+
+            <div class="table-header">
+
+                <div>
+                    <h3>Issued Books & Due Dates</h3>
+                    <p>Monitor books that need to be returned.</p>
+                </div>
+
+                <select class="table-filter">
+                    <option>All Records</option>
+                    <option>Due Soon</option>
+                    <option>Overdue</option>
+                </select>
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Student</th>
+                            <th>Book</th>
+                            <th>Issue Date</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>Rahul Kumar</td>
+                            <td>Clean Code</td>
+                            <td>25 Aug 2026</td>
+                            <td>08 Sep 2026</td>
+                            <td>
+                                <span class="status active">
+                                    Active
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Priya S</td>
+                            <td>Atomic Habits</td>
+                            <td>20 Aug 2026</td>
+                            <td>03 Sep 2026</td>
+                            <td>
+                                <span class="status warning">
+                                    Due Soon
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Arjun R</td>
+                            <td>Rich Dad Poor Dad</td>
+                            <td>10 Aug 2026</td>
+                            <td>24 Aug 2026</td>
+                            <td>
+                                <span class="status danger">
+                                    Overdue
+                                </span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FINES ================= -->
+
+    <section class="page-section" id="fines">
+
+        <div class="page-heading">
+
+            <div>
+                <span class="small-heading">FR-06</span>
+                <h1>Fine Calculation</h1>
+                <p>Calculate fines for overdue books.</p>
+            </div>
+
+        </div>
+
+
+        <div class="fine-layout">
+
+            <div class="fine-calculator">
+
+                <div class="calculator-icon">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+
+                <h3>Calculate Overdue Fine</h3>
+
+                <p>
+                    Enter the number of overdue days to calculate
+                    the applicable fine.
+                </p>
+
+                <label>Overdue Days</label>
+
+                <input
+                    type="number"
+                    id="overdueDays"
+                    min="0"
+                    placeholder="Enter number of days"
+                >
+
+                <label>Fine Per Day</label>
+
+                <input
+                    type="number"
+                    id="finePerDay"
+                    value="5"
+                    min="0"
+                >
+
+                <button
+                    class="primary-btn full-width"
+                    onclick="calculateFine()"
+                >
+                    <i class="fa-solid fa-calculator"></i>
+                    Calculate Fine
+                </button>
+
+                <div class="fine-result" id="fineResult">
+                    ₹0
+                </div>
+
+            </div>
+
+
+            <div class="fine-summary">
+
+                <div class="summary-card">
+                    <span>Total Fine</span>
+                    <strong>₹18,750</strong>
+                </div>
+
+                <div class="summary-card">
+                    <span>Pending Fine</span>
+                    <strong>₹6,300</strong>
+                </div>
+
+                <div class="fine-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=900&q=85"
+                        alt="Fine calculation"
+                    >
+
+                    <div>
+                        <h3>Overdue Management</h3>
+                        <p>
+                            Calculate overdue fines accurately
+                            based on the number of overdue days.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ================= BOOK MODAL ================= -->
+
+<div class="modal-overlay" id="bookModal">
+
+    <div class="custom-modal">
+
+        <button class="modal-close" onclick="closeBookModal()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="modal-icon">
+            <i class="fa-solid fa-book"></i>
+        </div>
+
+        <h3>Add New Book</h3>
+        <p>Add a new book record to the library.</p>
+
+        <form id="bookForm">
+
+            <label>Book Name</label>
+            <input
+                type="text"
+                placeholder="Enter book name"
+                required
+            >
+
+            <label>Author</label>
+            <input
+                type="text"
+                placeholder="Enter author name"
+                required
+            >
+
+            <label>Category</label>
+            <input
+                type="text"
+                placeholder="Enter category"
+                required
+            >
+
+            <button class="primary-btn full-width">
+                Add Book
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ================= MEMBER MODAL ================= -->
+
+<div class="modal-overlay" id="memberModal">
+
+    <div class="custom-modal">
+
+        <button class="modal-close" onclick="closeMemberModal()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="modal-icon">
+            <i class="fa-solid fa-user-plus"></i>
+        </div>
+
+        <h3>Add Student Member</h3>
+        <p>Enter student member information.</p>
+
+        <form id="memberForm">
+
+            <label>Student Name</label>
+            <input
+                type="text"
+                placeholder="Enter student name"
+                required
+            >
+
+            <label>Member ID</label>
+            <input
+                type="text"
+                placeholder="Enter member ID"
+                required
+            >
+
+            <label>Department</label>
+            <input
+                type="text"
+                placeholder="Enter department"
+                required
+            >
+
+            <button class="primary-btn full-width">
+                Add Member
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast-message" id="toastMessage">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toastText">Action completed.</span>
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

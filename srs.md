@@ -32,7 +32,7 @@ The purpose of the Library Management System is to provide a simple system for m
 * Integration with external library systems.
 * Advanced analytics or reporting beyond the listed requirements.
 
-This stays within the requested first-version scope and avoids introducing unlisted functionality.
+ stays within the requested first-version scope and avoids introducing unlisted functionality.
 
 
 
