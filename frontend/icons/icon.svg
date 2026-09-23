@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7065ff" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+    <linearGradient id="bookGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#f0f4ff" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#1e1b4b" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Background Rounded Squircle -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+
+  <!-- Inner Soft Glow Ring -->
+  <rect x="12" y="12" width="488" height="488" rx="100" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="4" />
+
+  <g filter="url(#shadow)">
+    <!-- Open Book Left Page -->
+    <path d="M112 188 C 112 188, 170 170, 240 190 L 240 350 C 170 330, 112 346, 112 346 Z" 
+          fill="url(#bookGrad)" />
+    
+    <!-- Open Book Right Page -->
+    <path d="M400 188 C 400 188, 342 170, 272 190 L 272 350 C 342 330, 400 346, 400 346 Z" 
+          fill="url(#bookGrad)" />
+
+    <!-- Book Spine Center Fold -->
+    <path d="M240 190 C 248 184, 264 184, 272 190 L 272 350 C 264 345, 248 345, 240 350 Z" 
+          fill="#e0e7ff" />
+
+    <!-- Decorative Text / Page Lines on Left Page -->
+    <path d="M142 222 C 175 212, 210 220, 222 226" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" fill="none" />
+    <path d="M142 248 C 175 238, 210 246, 222 252" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round" fill="none" />
+    <path d="M142 274 C 175 264, 210 272, 222 278" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round" fill="none" />
+
+    <!-- Decorative Text / Page Lines on Right Page -->
+    <path d="M370 222 C 337 212, 302 220, 290 226" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" fill="none" />
+    <path d="M370 248 C 337 238, 302 246, 290 252" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round" fill="none" />
+    <path d="M370 274 C 337 264, 302 272, 290 278" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round" fill="none" />
+
+    <!-- Bookmark Ribbon Ribbon Hanging Down -->
+    <path d="M256 186 L 256 280 L 246 270 L 236 280 L 236 188 Z" fill="url(#accentGrad)" />
+
+    <!-- Sparkle / Modern Star at Top Right -->
+    <path d="M366 142 L 372 158 L 388 164 L 372 170 L 366 186 L 360 170 L 344 164 L 360 158 Z" fill="#38bdf8" />
+  </g>
+
+  <!-- Wordmark "LibraX" at bottom inside emblem -->
+  <text x="256" y="420" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+        font-size="44" font-weight="800" letter-spacing="4" fill="#ffffff" text-anchor="middle">LIBRAX</text>
+</svg>

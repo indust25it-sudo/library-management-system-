@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Library Management System</title>
+    <meta name="description" content="A web-based library management system to manage books, student members, book issues, returns, due dates, and fines.">
+    <meta property="og:title" content="Library Management System">
+    <meta property="og:description" content="A web-based library management system to manage books, student members, book issues, returns, due dates, and fines.">
+
+    <!-- PWA & Mobile Web Standards -->
+    <meta name="theme-color" content="#635bff">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="LibraX">
+    <meta name="application-name" content="LibraX">
+    <meta name="msapplication-TileColor" content="#635bff">
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest">
+
+    <!-- Application Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" href="/icons/icon.svg">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon.png">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,6 +66,10 @@
             <h4>LibraX</h4>
             <span>Library System</span>
         </div>
+
+        <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close navigation drawer">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
     </div>
 
     <nav class="sidebar-nav">
@@ -88,7 +113,26 @@
             <span>Fines</span>
         </a>
 
+        <p class="menu-title">AI INTELLIGENCE</p>
+
+        <a href="#" class="nav-link" data-section="ai-assistant" id="navAiAssistant">
+            <i class="fa-solid fa-wand-magic-sparkles" style="color: #8b5cf6;"></i>
+            <span>AI Assistant</span>
+        </a>
+
     </nav>
+
+    <div class="sidebar-pwa-area" id="sidebarPwaArea" style="display: none;">
+        <button class="sidebar-install-card" id="sidebarInstallBtn" title="Install LibraX App">
+            <div class="sidebar-install-icon">
+                <i class="fa-solid fa-download"></i>
+            </div>
+            <div class="sidebar-install-info">
+                <strong>Install App</strong>
+                <small>Offline & Standalone</small>
+            </div>
+        </button>
+    </div>
 
     <div class="sidebar-bottom">
         <div class="library-image">
@@ -103,6 +147,8 @@
     </div>
 
 </aside>
+
+<div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
 
 
 <!-- ================= MAIN CONTENT ================= -->
@@ -132,6 +178,20 @@
         </div>
 
         <div class="top-actions">
+
+            <button class="pwa-header-install-btn" id="pwaInstallBtn" title="Install LibraX App" style="display: none;">
+                <i class="fa-solid fa-download"></i>
+                <span>Install</span>
+            </button>
+
+            <div class="db-indicator" id="dbStatusBadge" title="Database Connection Status" style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 6px 12px; background: rgba(99, 91, 255, 0.08); border: 1px solid rgba(99, 91, 255, 0.2); border-radius: 20px; font-weight: 500;">
+                <i class="fa-solid fa-database" style="color: #20b486;"></i>
+                <span id="dbStatusText">Supabase PostgreSQL</span>
+            </div>
+
+            <button class="icon-button" id="quickAiBtn" title="Ask LibraX AI Assistant" style="background: rgba(99, 91, 255, 0.1); color: var(--primary);">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </button>
 
             <button class="icon-button" id="themeToggle" title="Toggle theme">
                 <i class="fa-solid fa-moon"></i>
@@ -251,7 +311,7 @@
 
                 <div>
                     <span>Total Books</span>
-                    <h3>2,458</h3>
+                    <h3 id="statTotalBooks">2,458</h3>
                     <small>Books in library</small>
                 </div>
             </div>
@@ -263,7 +323,7 @@
 
                 <div>
                     <span>Issued Books</span>
-                    <h3>348</h3>
+                    <h3 id="statIssuedBooks">348</h3>
                     <small>Currently issued</small>
                 </div>
             </div>
@@ -275,7 +335,7 @@
 
                 <div>
                     <span>Student Members</span>
-                    <h3>1,245</h3>
+                    <h3 id="statStudentMembers">1,245</h3>
                     <small>Registered members</small>
                 </div>
             </div>
@@ -287,7 +347,7 @@
 
                 <div>
                     <span>Overdue Books</span>
-                    <h3>27</h3>
+                    <h3 id="statOverdueBooks">27</h3>
                     <small>Need attention</small>
                 </div>
             </div>
@@ -360,7 +420,7 @@
                     </button>
                 </div>
 
-                <div class="issue-list">
+                <div class="issue-list" id="recentIssuesList">
 
                     <div class="issue-item">
                         <div class="mini-avatar">RK</div>
@@ -715,20 +775,20 @@
                 <form id="issueForm">
 
                     <label>Student Member</label>
-                    <select required>
+                    <select id="issueMemberSelect" required>
                         <option value="">Select member</option>
-                        <option>Rahul Kumar - LIB001</option>
-                        <option>Priya S - LIB002</option>
-                        <option>Arjun R - LIB003</option>
+                        <option value="1">Rahul Kumar - LIB001</option>
+                        <option value="2">Priya S - LIB002</option>
+                        <option value="3">Arjun R - LIB003</option>
                     </select>
 
                     <label>Book</label>
-                    <select required>
+                    <select id="issueBookSelect" required>
                         <option value="">Select book</option>
-                        <option>The Great Gatsby</option>
-                        <option>Atomic Habits</option>
-                        <option>Think and Grow Rich</option>
-                        <option>Rich Dad Poor Dad</option>
+                        <option value="1">The Great Gatsby</option>
+                        <option value="2">Atomic Habits</option>
+                        <option value="3">Think and Grow Rich</option>
+                        <option value="4">Rich Dad Poor Dad</option>
                     </select>
 
                     <label>Issue Date</label>
@@ -878,10 +938,10 @@
                     <p>Monitor books that need to be returned.</p>
                 </div>
 
-                <select class="table-filter">
-                    <option>All Records</option>
-                    <option>Due Soon</option>
-                    <option>Overdue</option>
+                <select class="table-filter" id="dueDateFilter">
+                    <option value="all">All Records</option>
+                    <option value="due-soon">Due Soon</option>
+                    <option value="overdue">Overdue</option>
                 </select>
 
             </div>
@@ -903,7 +963,7 @@
 
                     </thead>
 
-                    <tbody>
+                    <tbody id="dueDatesTableBody">
 
                         <tr>
                             <td>Rahul Kumar</td>
@@ -1050,7 +1110,216 @@
 
     </section>
 
+
+    <!-- ================= AI ASSISTANT ================= -->
+
+    <section class="page-section" id="ai-assistant">
+
+        <div class="page-heading">
+
+            <div>
+                <span class="small-heading" style="color: var(--primary);"><i class="fa-solid fa-sparkles"></i> AI INTELLIGENCE</span>
+                <h1>AI Library Assistant</h1>
+                <p>Natural language assistant grounded in your live library catalog, active loans, student members, and fines.</p>
+            </div>
+
+            <div class="ai-status-pill" id="aiStatusPill" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(99, 91, 255, 0.08); border: 1px solid rgba(99, 91, 255, 0.2); border-radius: 30px; font-size: 13px; font-weight: 500;">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: #20b486; display: inline-block;"></span>
+                <span>Gemini 3.8 Flash • Real-Time Grounding</span>
+            </div>
+
+        </div>
+
+        <div class="ai-layout">
+
+            <!-- Chat Interface -->
+            <div class="ai-chat-card">
+
+                <div class="ai-chat-header">
+                    <div class="ai-header-left">
+                        <div class="ai-avatar">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div>
+                            <h4>LibraX Copilot</h4>
+                            <span>Live Database Connected</span>
+                        </div>
+                    </div>
+
+                    <button class="ai-clear-btn" id="aiClearChatBtn" title="Clear Chat History">
+                        <i class="fa-solid fa-trash-can"></i>
+                        <span>Clear</span>
+                    </button>
+                </div>
+
+                <!-- Prompt Suggestions -->
+                <div class="ai-suggestions-bar">
+                    <span class="suggestions-label"><i class="fa-regular fa-lightbulb"></i> Suggested queries:</span>
+                    <div class="ai-chips-list">
+                        <button class="ai-chip" data-prompt="Which books are overdue?">⚠️ Which books are overdue?</button>
+                        <button class="ai-chip" data-prompt="Is Clean Code available right now?">📖 Is Clean Code available?</button>
+                        <button class="ai-chip" data-prompt="Give me a complete summary report of our library operations.">📊 Operations summary report</button>
+                        <button class="ai-chip" data-prompt="List all registered student members and how many books they borrowed.">👥 Registered student members</button>
+                        <button class="ai-chip" data-prompt="How much pending fines are there and what is the policy?">💰 Pending fines & policy</button>
+                        <button class="ai-chip" data-prompt="Recommend books for software engineers and personal growth.">💡 Book recommendations</button>
+                    </div>
+                </div>
+
+                <!-- Chat Thread -->
+                <div class="ai-chat-thread" id="aiChatThread">
+                    <div class="ai-message ai-message-model">
+                        <div class="ai-message-avatar">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div class="ai-message-content">
+                            <div class="ai-message-bubble">
+                                <p>👋 <strong>Welcome to LibraX AI Assistant!</strong></p>
+                                <p>I am grounded in your live library database. You can ask me anything about:</p>
+                                <ul>
+                                    <li><strong>Book Inventory & Availability:</strong> Inquire about any book title, category, or available copies.</li>
+                                    <li><strong>Due Dates & Overdue Loans:</strong> Find out which student owes books and when they are due.</li>
+                                    <li><strong>Student Member Accounts:</strong> Check borrowing activity and contact details.</li>
+                                    <li><strong>Fines & Penalties:</strong> Calculate fines based on ₹5.00/day overdue policy.</li>
+                                    <li><strong>Executive Summaries:</strong> Request instant health and usage reports.</li>
+                                </ul>
+                                <p>Click a suggested query above or type your question below.</p>
+                            </div>
+                            <span class="ai-message-time">Just now</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Typing / Loading Indicator -->
+                <div class="ai-typing-indicator" id="aiTypingIndicator" style="display: none;">
+                    <div class="ai-typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <span class="ai-typing-label">Analyzing live library records...</span>
+                </div>
+
+                <!-- Error Banner -->
+                <div class="ai-error-banner" id="aiErrorBanner" style="display: none;">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span id="aiErrorText">An error occurred while contacting the AI assistant.</span>
+                    <button id="aiRetryBtn" class="ai-retry-btn">Retry</button>
+                </div>
+
+                <!-- Chat Input Form -->
+                <form class="ai-input-form" id="aiChatForm">
+                    <div class="ai-input-wrapper">
+                        <input
+                            type="text"
+                            id="aiPromptInput"
+                            placeholder="Ask about books, active loans, borrowers, overdue fines, or request a summary..."
+                            autocomplete="off"
+                            required
+                        >
+                        <button type="submit" id="aiSendBtn" class="ai-send-btn" title="Send Question">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="ai-input-footer">
+                        <small><i class="fa-solid fa-shield-halved"></i> Powered by Gemini 3.8 Flash • Server-side API key secured • Real-time grounding</small>
+                    </div>
+                </form>
+
+            </div>
+
+            <!-- Grounding & System Context Panel -->
+            <div class="ai-sidebar-card">
+
+                <div class="ai-info-box">
+                    <div class="ai-info-header">
+                        <i class="fa-solid fa-database" style="color: var(--primary);"></i>
+                        <h4>Live Grounding Data</h4>
+                    </div>
+                    <p>The AI dynamically inspects the database on each query to guarantee factual, real-time answers.</p>
+
+                    <div class="ai-stats-mini-grid">
+                        <div class="ai-stat-mini">
+                            <span class="mini-label">Total Titles</span>
+                            <strong class="mini-value" id="aiGroundedBooks">5</strong>
+                        </div>
+                        <div class="ai-stat-mini">
+                            <span class="mini-label">Active Loans</span>
+                            <strong class="mini-value" id="aiGroundedIssues">3</strong>
+                        </div>
+                        <div class="ai-stat-mini">
+                            <span class="mini-label">Overdue</span>
+                            <strong class="mini-value" id="aiGroundedOverdue" style="color: var(--danger);">1</strong>
+                        </div>
+                        <div class="ai-stat-mini">
+                            <span class="mini-label">Members</span>
+                            <strong class="mini-value" id="aiGroundedMembers">3</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-capabilities-box">
+                    <h4><i class="fa-solid fa-bolt" style="color: #f59e0b;"></i> AI Capabilities</h4>
+                    <div class="capability-item">
+                        <div class="cap-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <div>
+                            <strong>Natural Language Search</strong>
+                            <p>Query titles, authors, and genres without exact keyword matching.</p>
+                        </div>
+                    </div>
+                    <div class="capability-item">
+                        <div class="cap-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                        <div>
+                            <strong>Due Date & Overdue Auditing</strong>
+                            <p>Instantly flags overdue loans, days delayed, and calculates accrued fines.</p>
+                        </div>
+                    </div>
+                    <div class="capability-item">
+                        <div class="cap-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                        <div>
+                            <strong>Operational Summaries</strong>
+                            <p>Generate synthesized summaries of library inventory and utilization.</p>
+                        </div>
+                    </div>
+                    <div class="capability-item">
+                        <div class="cap-icon"><i class="fa-solid fa-compass"></i></div>
+                        <div>
+                            <strong>Smart Recommendations</strong>
+                            <p>Provide tailored book suggestions based on reader interest and catalog stock.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
 </main>
+
+<!-- ================= MOBILE BOTTOM NAVIGATION (THUMB ZONE) ================= -->
+<nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Mobile Navigation">
+    <button class="mobile-nav-btn active" data-section="dashboard" title="Dashboard">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>Dashboard</span>
+    </button>
+    <button class="mobile-nav-btn" data-section="books" title="Books">
+        <i class="fa-solid fa-book"></i>
+        <span>Books</span>
+    </button>
+    <button class="mobile-nav-btn" data-section="issue-book" title="Issue/Return">
+        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+        <span>Issue</span>
+    </button>
+    <button class="mobile-nav-btn" data-section="members" title="Members">
+        <i class="fa-solid fa-user-group"></i>
+        <span>Members</span>
+    </button>
+    <button class="mobile-nav-btn" data-section="ai-assistant" title="AI Assistant">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <span>AI Copilot</span>
+    </button>
+</nav>
 
 
 <!-- ================= BOOK MODAL ================= -->
@@ -1075,6 +1344,7 @@
             <label>Book Name</label>
             <input
                 type="text"
+                id="bookTitleInput"
                 placeholder="Enter book name"
                 required
             >
@@ -1082,6 +1352,7 @@
             <label>Author</label>
             <input
                 type="text"
+                id="bookAuthorInput"
                 placeholder="Enter author name"
                 required
             >
@@ -1089,11 +1360,21 @@
             <label>Category</label>
             <input
                 type="text"
+                id="bookCategoryInput"
                 placeholder="Enter category"
                 required
             >
 
-            <button class="primary-btn full-width">
+            <label>Copies</label>
+            <input
+                type="number"
+                id="bookCopiesInput"
+                placeholder="Number of copies"
+                min="1"
+                value="1"
+            >
+
+            <button class="primary-btn full-width" type="submit">
                 Add Book
             </button>
 
@@ -1126,6 +1407,7 @@
             <label>Student Name</label>
             <input
                 type="text"
+                id="memberNameInput"
                 placeholder="Enter student name"
                 required
             >
@@ -1133,18 +1415,27 @@
             <label>Member ID</label>
             <input
                 type="text"
-                placeholder="Enter member ID"
+                id="memberIdInput"
+                placeholder="Enter member ID (e.g. LIB004)"
                 required
             >
 
             <label>Department</label>
             <input
                 type="text"
+                id="memberDeptInput"
                 placeholder="Enter department"
                 required
             >
 
-            <button class="primary-btn full-width">
+            <label>Email (Optional)</label>
+            <input
+                type="email"
+                id="memberEmailInput"
+                placeholder="Enter student email"
+            >
+
+            <button class="primary-btn full-width" type="submit">
                 Add Member
             </button>
 
@@ -1152,6 +1443,58 @@
 
     </div>
 
+</div>
+
+
+<!-- OFFLINE STATUS BANNER -->
+<div class="offline-banner" id="offlineIndicator" style="display: none;" role="status" aria-live="polite">
+    <div class="offline-content">
+        <i class="fa-solid fa-wifi-slash"></i>
+        <span><strong>Offline Mode:</strong> Using cached library data. Actions will queue until internet reconnects.</span>
+    </div>
+    <button class="offline-dismiss-btn" id="dismissOfflineBtn" aria-label="Dismiss offline banner">&times;</button>
+</div>
+
+
+<!-- iOS INSTALLATION GUIDE MODAL -->
+<div class="modal-overlay" id="iosInstallModal" style="display: none;">
+    <div class="custom-modal pwa-guide-modal">
+        <button class="modal-close" id="iosModalCloseBtn" aria-label="Close guide">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="modal-icon" style="background: rgba(99, 91, 255, 0.1); color: var(--primary);">
+            <i class="fa-brands fa-apple"></i>
+        </div>
+
+        <h2>Install on iPhone & iPad</h2>
+        <p class="guide-subtitle">Install LibraX directly to your home screen for instantaneous loading and offline access:</p>
+
+        <ol class="ios-install-steps">
+            <li>
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    Tap the <strong>Share</strong> button <i class="fa-solid fa-arrow-up-from-bracket" style="color: var(--primary);"></i> in the Safari bottom toolbar.
+                </div>
+            </li>
+            <li>
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    Scroll down and tap <strong>Add to Home Screen</strong> <i class="fa-regular fa-square-plus" style="color: var(--primary);"></i>.
+                </div>
+            </li>
+            <li>
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    Confirm by tapping <strong>Add</strong> in the top-right corner.
+                </div>
+            </li>
+        </ol>
+
+        <button class="primary-btn full-width" id="iosGuideOkBtn" type="button" style="margin-top: 14px;">
+            Got It
+        </button>
+    </div>
 </div>
 
 
